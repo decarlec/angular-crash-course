@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from 'src/app/Task';
 import { faCookie } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,10 +9,20 @@ import { faCookie } from '@fortawesome/free-solid-svg-icons';
 })
 export class TaskItemComponent implements OnInit {
   @Input() task: Task;
+  @Output() deleteTask: EventEmitter<Task> = new EventEmitter();
+  @Output() toggleReminder: EventEmitter<Task> = new EventEmitter();
+
   faCookie = faCookie;
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onDelete(task) {
+    this.deleteTask.emit(task);
+  }
+
+  onToggle(task){
+    this.toggleReminder.emit(task);
   }
 
 }
